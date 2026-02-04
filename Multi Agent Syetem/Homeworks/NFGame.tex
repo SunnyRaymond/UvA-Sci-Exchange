@@ -1,0 +1,88 @@
+
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{nicefrac}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{nicematrix} % This command is needed for the first example
+\usepackage{environ}
+\usepackage{etoolbox}
+
+%%%%%% Commands for second example
+
+\usepackage{listofitems} % for \readlist{} instead of \getargsC{}
+
+% \nfgame{T B L R RTL RTR RBL RBR CTL CTR CBL CBR}
+\newcommand{\nfgame}[1]{%
+\setsepchar{ }
+\readlist\args{#1}
+\begin{tikzpicture}[scale=0.65]
+
+% Row labels (left side)
+\node (RT) at (-2,1) [label=left:{\args[1]}] {};
+\node (RB) at (-2,-1) [label=left:{\args[2]}] {};
+% Column labels (top side)
+\node (CL) at (-1,2) [label=above:{\args[3]}] {};
+\node (CR) at (1,2) [label=above:{\args[4]}] {};
+
+% Row player's payoff (lower-left in each cell)
+\node (RTL) at (-1.4,0.6) {\args[5]};
+\node (RTR) at (0.6,0.6) {\args[6]};
+\node (RBL) at (-1.4,-1.4) {\args[7]};
+\node (RBR) at (0.6,-1.4) {\args[8]};
+
+% Column player's payoff (upper-right in each cell)
+\node (CTL) at (-0.6,1.4) {\args[9]};
+\node (CTR) at (1.4,1.4) {\args[10]};
+\node (CBL) at (-0.6,-0.6) {\args[11]};
+\node (CBR) at (1.4,-0.6) {\args[12]};
+
+%Draw the grid lines
+\draw[-,very thick] (-2,-2) to (2,-2);
+\draw[-,very thick] (-2,0) to (2,0);
+\draw[-,very thick] (-2,2) to (2,2);
+\draw[-,very thick] (-2,-2) to (-2,2);
+\draw[-,very thick] (0,-2) to (0,2);
+\draw[-,very thick] (2,-2) to (2,2);
+% Draw the thin diagonal lines in each cell to separate payoffs
+\draw[-,very thin] (-2,2) to (0,0);
+\draw[-,very thin] (0,0) to (2,-2);
+\draw[-,very thin] (-2,0) to (0,-2);
+\draw[-,very thin] (0,2) to (2,0);
+\end{tikzpicture}}
+
+
+
+\theoremstyle{definition}
+\newtheorem{exercise}{Exercise}
+\newtheorem{solution}{Solution}
+
+\title{
+    \textsc{How to encode normal-form games in \LaTeX}
+
+    }
+\begin{document}
+\maketitle % Print the title
+
+One way to denote the payoff matrix of a game is this:
+  \[
+      \begin{bNiceMatrix}[first-row,first-col]
+          &  L 	& R\\
+        T & (2,-4) & (6, 3) \\
+        B & (1, 2) & (8,1) 
+      \end{bNiceMatrix}			
+  \]     
+
+Another way to visualize a normal-form game is this:
+    \begin{center}
+        \nfgame{T B L R 
+        $2$ $6$ $1$ $8$ 
+        $-4$ $3$ $2$ $1$}       
+    \end{center}
+
+
+\end{document}

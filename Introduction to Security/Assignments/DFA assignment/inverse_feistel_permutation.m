@@ -1,0 +1,16 @@
+% DES inverse feistel permutation P^{-1}(c) 
+function result = inverse_feistel_permutation(x)
+
+% x is a 1×32 vector (bits). This applies P^{-1} (the inverse of the DES P permutation).
+% Standard DES P:
+% P = [16 7 20 21 29 12 28 17 1 15 23 26 5 18 31 10 ...
+%      2  8 24 14 32 27  3  9 19 13 30  6 22 11  4 25]
+% So P^{-1} is:
+Pinv = [ ...
+     9 17 23 31 13 28  2 18 ...
+    24 16 30  6 26 20 10  1 ...
+     8 14 25  3  4 29 11 19 ...
+    32 12 22  7  5 27 15 21];
+
+result = x(Pinv);
+end

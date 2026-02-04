@@ -1,0 +1,27 @@
+# AES-128 — Python
+
+## How to run
+
+```bash
+python aes_cbc.py
+```
+
+The ciphertext (in hex) will be printed.
+Edit the `KEY`, `IV`, and `PLAINTEXT` values at the top of the script to try different inputs.
+
+---
+
+## What the code does
+
+* Implements AES-128 encryption in pure Python.
+* Uses CBC mode with PKCS#7 padding.
+* Includes the AES core steps: SubBytes, ShiftRows, MixColumns, AddRoundKey, and Key Expansion.
+* The IV is used to randomize the first block so the same plaintext doesn’t always produce the same ciphertext.
+
+---
+
+## Design choices
+
+* Plain functions without OOP for readability.
+* Column-major state indexing to match the AES standard.
+* CBC chosen as it's taught in lecture, and shows how IV + padding work.
